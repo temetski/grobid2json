@@ -495,7 +495,15 @@ def extract_body_text_from_div(
     for tag in div:
         try:
             if tag.name == "p":
-                if tag.text:
+                if tag.find_all("s"): # handle segmented sentences
+                    for s in tag.find_all("s"):
+                        if s.text:
+                            chunks.append(
+                                process_paragraph(
+                                    sp, s, sections, bib_dict, ref_dict, cleanup_bracket
+                                )
+                            )
+                elif tag.text:
                     chunks.append(
                         process_paragraph(
                             sp, tag, sections, bib_dict, ref_dict, cleanup_bracket
