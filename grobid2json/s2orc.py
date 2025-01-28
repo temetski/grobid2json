@@ -7,7 +7,7 @@ SKIP_KEYS = {"link", "bib_id"}
 
 REFERENCE_OUTPUT_KEYS = {
     "figure": {"text", "type_str", "uris", "num", "fig_num"},
-    "table": {"text", "type_str", "content", "num", "html"},
+    "table": {"text", "type_str", "content", "num", "html", "fig_num"},
     "footnote": {"text", "type_str", "num"},
     "section": {"text", "type_str", "num", "parent"},
     "equation": {"text", "type_str", "latex", "mathml", "num"},

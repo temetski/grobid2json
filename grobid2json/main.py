@@ -99,6 +99,13 @@ def extract_figures_and_tables_from_tei_xml(sp: BeautifulSoup) -> dict[str, dict
         try:
             if fig.name and fig.get("xml:id"):
                 if fig.get("type") == "table":
+                    if True in [
+                        char.isdigit()
+                        for char in fig.findNext("head").findNext("label")
+                    ]:
+                        fig_num = fig.findNext("head").findNext("label").contents[0]
+                    else:
+                        fig_num = None
                     ref_map[normalize_grobid_id(fig.get("xml:id"))] = {
                         "text": (
                             fig.figDesc.text.strip()
@@ -110,7 +117,7 @@ def extract_figures_and_tables_from_tei_xml(sp: BeautifulSoup) -> dict[str, dict
                         "latex": None,
                         "type": "table",
                         "content": table_to_html(fig.table),
-                        "fig_num": fig.get("xml:id"),
+                        "fig_num": fig_num,
                     }
                 else:
                     if True in [
