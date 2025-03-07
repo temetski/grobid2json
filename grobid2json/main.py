@@ -241,17 +241,13 @@ def process_citations_in_paragraph(
                     rtag.replace_with(sp.new_string(f" {cite_key} "))
                     cite_map[cite_key] = (None, surface_span)
                     continue
-                if bracket:
-                    if surface_span and (
+                if bracket and surface_span and (
                         surface_span[0] == "["
                         or surface_span[-1] == "]"
                         or surface_span[-1] == ","
                     ):
                         pass
-                    else:
-                        rtag.replace_with(sp.new_string(f" {surface_span} "))
-                        continue
-                else:
+                else: # no brackets OR bracket assumption is false
                     cite_key = tokgen.next()
                     rtag.replace_with(sp.new_string(f" {cite_key} "))
                     cite_map[cite_key] = (rtag_ref_id, surface_span)
