@@ -122,7 +122,7 @@ def extract_figures_and_tables_from_tei_xml(sp: BeautifulSoup) -> dict[str, dict
                 else:
                     if True in [
                         char.isdigit()
-                        for char in fig.findNext("head").findNext("label")
+                        for char in fig.findNext("head").findNext("label") or []
                     ]:
                         fig_num = fig.findNext("head").findNext("label").contents[0]
                     else:
