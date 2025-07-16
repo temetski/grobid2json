@@ -13,7 +13,7 @@ REFERENCE_OUTPUT_KEYS = {
     "equation": {"text", "type_str", "latex", "mathml", "num"},
 }
 
-METADATA_KEYS = {"title", "authors", "year", "venue", "identifiers"}
+METADATA_KEYS = {"title", "authors", "year", "venue", "identifiers", "doi"}
 
 
 class ReferenceEntry:
@@ -162,12 +162,14 @@ class Metadata:
         year: Optional[str] = None,
         venue: Optional[str] = None,
         identifiers: Optional[dict] = {},
+        doi: Optional[str] = None,
     ):
         self.title = title
         self.authors = [Author(**author) for author in authors]
         self.year = year
         self.venue = venue
         self.identifiers = identifiers
+        self.doi = doi
 
     def as_json(self):
         return {
@@ -176,6 +178,7 @@ class Metadata:
             "year": self.year,
             "venue": self.venue,
             "identifiers": self.identifiers,
+            "doi": self.doi,
         }
 
 
